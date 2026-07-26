@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — Botaki Ba Afrika</title>
+<style>
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('/fonts/LemonMilk.woff2') format('woff2'),
+       url('/fonts/LemonMilk.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('/fonts/LemonMilk-Bold.woff2') format('woff2'),
+       url('/fonts/LemonMilk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('/fonts/LemonMilk-ExtraBold.woff2') format('woff2'),
+       url('/fonts/LemonMilk-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avernire Medium';
+  src: url('/fonts/Avernire-Medium.woff2') format('woff2'),
+       url('/fonts/Avernire-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --cream: #EEF0C4;
+  --yellow: #F3B417;
+  --orange: #E97C2C;
+  --brown: #5A2A0C;
+  --green: #163C0A;
+  --ink: #171512;
+  --muted: #6B6858;
+  --card-gray: #C9C9C4;
+  --white: #FDFDF8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Avernire Medium', Arial, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.5; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Lemon Milk', Arial, sans-serif; }
+a { color: inherit; text-decoration: none; }
+img, .ph { display: block; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+button { font-family: inherit; }
+
+/* ---------- HEADER (shared with the rest of the site) ---------- */
+header { background: var(--ink); position: sticky; top: 0; z-index: 50; }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+.brandmark { width: 64px; height: 64px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; }
+.brandmark svg { width: 32px; height: 32px; }
+nav { display: flex; align-items: center; gap: 24px; }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-link { color: var(--white); font-size: 13px; letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+.nav-link[aria-current="page"] { text-decoration: underline; text-underline-offset: 5px; }
+.nav-cta { background: var(--white); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; text-transform: uppercase; }
+.menu-toggle { display: none; background: none; border: none; color: var(--white); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.nav-item { position: relative; }
+.nav-item .caret { width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s ease; }
+.nav-item:hover .caret, .nav-item.open .caret { transform: rotate(225deg); margin-top: 3px; }
+.nav-dropdown {
+  position: absolute; top: 100%; left: 0; margin-top: 16px;
+  background: var(--white); color: var(--ink); border-radius: 12px; padding: 10px;
+  min-width: 180px; box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+.nav-item:hover .nav-dropdown, .nav-item.open .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown a { display: block; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.nav-dropdown a:hover { background: var(--cream); }
+@media (max-width: 800px) {
+  .nav-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--ink); flex-direction: column; align-items: flex-start;
+    padding: 20px 32px; gap: 4px;
+  }
+  .nav-links.nav-open { display: flex; }
+  .nav-item { width: 100%; }
+  .nav-item .nav-link { width: 100%; padding: 10px 0; justify-content: space-between; }
+  .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(255,255,255,0.06); width: 100%; margin: 0 0 8px; }
+  .nav-dropdown a { color: var(--white); }
+  .nav-dropdown a:hover { background: rgba(255,255,255,0.1); }
+  .menu-toggle { display: block; }
+}
+
+/* ---------- BLOG HERO ---------- */
+.blog-hero { padding: 64px 0 40px; text-align: center; }
+.blog-hero .eyebrow { color: var(--orange); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+.blog-hero h1 { font-size: clamp(34px, 5vw, 48px); font-weight: 800; margin-bottom: 14px; }
+.blog-hero p { color: var(--muted); font-size: 15.5px; max-width: 480px; margin: 0 auto; }
+
+/* ---------- LAYOUT ---------- */
+.blog-section { padding-bottom: 64px; }
+.blog-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 56px; align-items: start; }
+
+/* ---------- POST LIST ---------- */
+.post-list { display: flex; flex-direction: column; gap: 44px; }
+.post-card { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+.post-card .ph { aspect-ratio: 4/3; border-radius: 14px; }
+.post-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.post-tags a { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--brown); background: rgba(90,42,12,0.08); padding: 4px 10px; border-radius: 999px; }
+.post-card h2 { font-size: 21px; font-weight: 800; margin-bottom: 8px; line-height: 1.25; }
+.post-card h2 a:hover { text-decoration: underline; }
+.post-card .excerpt { color: var(--muted); font-size: 14px; margin-bottom: 12px; max-width: 480px; }
+.post-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.read-more { font-weight: 700; font-size: 13px; color: var(--ink); }
+.read-more::after { content: " →"; }
+@media (max-width: 700px) { .post-card { grid-template-columns: 1fr; } }
+
+/* ---------- SIDEBAR ---------- */
+.blog-sidebar section { margin-bottom: 40px; }
+.blog-sidebar h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; color: var(--brown); }
+.topic-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.topic-list a { font-size: 12px; padding: 6px 12px; border-radius: 999px; background: var(--white); border: 1px solid rgba(23,21,18,0.12); }
+.topic-list a:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.top-posts { display: flex; flex-direction: column; gap: 14px; }
+.top-posts a { font-size: 13.5px; font-weight: 700; line-height: 1.3; }
+.top-posts a:hover { text-decoration: underline; }
+.sidebar-note { background: var(--white); border-radius: 14px; padding: 22px; }
+.sidebar-note p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.sidebar-note input { width: 100%; padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(23,21,18,0.2); font-size: 13px; margin-bottom: 10px; }
+.sidebar-note .btn { width: 100%; }
+
+/* ---------- PAGINATION ---------- */
+.pagination { display: flex; gap: 8px; justify-content: center; margin-top: 56px; }
+.pagination a, .pagination span { padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; }
+.pagination a:hover { background: var(--white); }
+.pagination .current { background: var(--ink); color: var(--white); }
+
+.btn { padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; display: inline-block; }
+.btn-primary { background: var(--ink); color: var(--white); }
+.ph { background: var(--card-gray); border-radius: 18px; width: 100%; }
+
+/* ---------- FOOTER ---------- */
+footer { background: var(--ink); color: var(--white); }
+.footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
+.footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+.footer-social svg { width: 15px; height: 15px; fill: var(--white); }
+.footer-col span.topic { display: block; font-weight: 700; font-size: 13px; margin-bottom: 14px; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.06em; }
+.footer-col a { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+.footer-col .contact-line { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+.footer-map { margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+.footer-map iframe { display: block; width: 100%; height: 220px; border: 0; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding: 20px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: rgba(253,253,248,0.6); }
+
+@media (max-width: 900px) {
+  .blog-layout { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) { .footer-top { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="botaki-ba-afrika.html#home" class="brandmark" aria-label="Botaki Ba Afrika">
+      <svg viewBox="0 0 24 24"><path d="M12 2 C13.5 5 14.5 6.5 14.5 8.5 C14.5 10 13.5 11 12 11 C10.5 11 9.5 10 9.5 8.5 C9.5 6.5 10.5 5 12 2 Z M6 12 A6 6 0 0 1 18 12 A6 5 0 0 1 6 12 Z" fill="#171512"/></svg>
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="./" class="nav-link">Home</a> 
+        <a href="./about.html" class="nav-link">About</a>     
+        <a href="bloG" class="nav-link" aria-current="page">Blog</a>
+      </div>
+      <a href="#" class="nav-cta">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+  </div>
+</header>
+
+<main>
+  <section class="blog-hero">
+    <div class="wrap">
+      <div class="eyebrow">Journal</div>
+      <h1>Stories from the collective</h1>
+      <p>Notes on craft, community, and the four disciplines that make up Botaki Ba Afrika.</p>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="wrap blog-layout">
+
+      <!-- ============ POST LIST ============ -->
+      <div class="post-list">
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Visual Art</a><a href="#">Community</a><a href="#">Technique</a>
+            </div>
+            <h2><a href="#">Behind the mural: how our visual artists choose their colours</a></h2>
+            <p class="excerpt">Every mural starts as an argument about colour before it becomes a wall. We sat in on a planning session to see how the group actually agrees on a palette.</p>
+            <div class="post-meta">4 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Music</a><a href="#">Performance</a><a href="#">Community</a>
+            </div>
+            <h2><a href="#">Call and response: the rhythms behind our music nights</a></h2>
+            <p class="excerpt">Our Thursday music nights aren't rehearsals in the usual sense — they're closer to a conversation. Here's how a single rhythm gets passed around the circle.</p>
+            <div class="post-meta">3 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Literature</a><a href="#">Oral Tradition</a><a href="#">Storytelling</a>
+            </div>
+            <h2><a href="#">Passing down the story: oral poetry in our literature circle</a></h2>
+            <p class="excerpt">Long before anything is written down, it's spoken aloud. We look at how Botaki's writers use performance as a first draft.</p>
+            <div class="post-meta">5 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Crafts</a><a href="#">Pottery</a><a href="#">Technique</a>
+            </div>
+            <h2><a href="#">From clay to craft: a morning with our potters</a></h2>
+            <p class="excerpt">No two pieces from our craft circle are ever quite the same — and that's intentional. A look at the hands-on process behind our woven and pottery work.</p>
+            <div class="post-meta">4 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Events</a><a href="#">Community</a>
+            </div>
+            <h2><a href="#">Inside our next event: what to expect this season</a></h2>
+            <p class="excerpt">A preview of what's coming up, who's involved, and how to get there — plus a few notes from the last gathering.</p>
+            <div class="post-meta">3 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+        <article class="post-card">
+          <div class="ph" role="img" aria-label="Post image placeholder"></div>
+          <div>
+            <div class="post-tags">
+              <a href="#">Community</a><a href="#">Visual Art</a><a href="#">Music</a><a href="#">Literature</a><a href="#">Crafts</a>
+            </div>
+            <h2><a href="#">Weaving together: how four disciplines become one collective</a></h2>
+            <p class="excerpt">Visual art, music, literature, and crafts rarely stay in their own lane at Botaki. Here's how a single project can touch all four.</p>
+            <div class="post-meta">5 minute read</div>
+            <a href="#" class="read-more">Read More</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="blog-sidebar">
+        <section>
+          <h3>Topics</h3>
+          <div class="topic-list">
+            <a href="#">Visual Art (14)</a>
+            <a href="#">Music (11)</a>
+            <a href="#">Literature (9)</a>
+            <a href="#">Crafts (12)</a>
+            <a href="#">Community (18)</a>
+            <a href="#">Events (7)</a>
+            <a href="#">Technique (10)</a>
+            <a href="#">Oral Tradition (5)</a>
+            <a href="#">Storytelling (6)</a>
+            <a href="#">Performance (8)</a>
+          </div>
+        </section>
+
+        <section>
+          <h3>Top Posts</h3>
+          <div class="top-posts">
+            <a href="#">Weaving together: how four disciplines become one collective</a>
+            <a href="#">Behind the mural: how our visual artists choose their colours</a>
+            <a href="#">Passing down the story: oral poetry in our literature circle</a>
+            <a href="#">From clay to craft: a morning with our potters</a>
+          </div>
+        </section>
+
+        <section class="sidebar-note">
+          <h3>Stay in the loop</h3>
+          <p>Get new posts and event notices in your inbox.</p>
+          <form onsubmit="return false;">
+            <input type="email" placeholder="Your email address" aria-label="Email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </section>
+      </aside>
+
+    </div>
+
+    <div class="wrap">
+      <div class="pagination">
+        <span>Prev</span>
+        <a href="#" class="current">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">Next</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================================footer================================================= -->
+<footer id="contact">
+  <div class="wrap footer-top">
+    <div class="footer-brand-col">
+      <div class="flogo">BOTAKI BA AFRIKA</div>
+      <p>We are not artists. We are the very ground from which art rises.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5a1.94 1.94 0 1 1 0 3.88 1.94 1.94 0 0 1 0-3.88ZM5 9.5h3.9V19H5V9.5Zm6.1 0h3.74v1.3h.05c.52-.98 1.8-2 3.7-2 3.96 0 4.7 2.6 4.7 6V19h-3.9v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.28-1.88 2.6V19h-3.9V9.5Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.6-1.8-1.8C19 5 12 5 12 5s-7 0-8.8.5c-.9.2-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.6 1.8 1.8C5 19 12 19 12 19s7 0 8.8-.5c.9-.2 1.6-.9 1.8-1.8.4-1.5.4-4.7.4-4.7ZM10 15.2V8.8l6 3.2-6 3.2Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.06 1 .05 1.7.2 2.3.45.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.45 2.3.05 1 .06 1.4.06 4.1s0 3.1-.06 4.1c-.05 1-.2 1.7-.45 2.3a4.3 4.3 0 0 1-1.06 1.6c-.5.5-1 .82-1.6 1.06-.6.24-1.3.4-2.3.45-1 .05-1.4.06-4.1.06s-3.1 0-4.1-.06c-1-.05-1.7-.2-2.3-.45a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.45-2.3C2 15.1 2 14.7 2 12s0-3.1.06-4.1c.05-1 .2-1.7.45-2.3.24-.6.56-1.1 1.06-1.6.5-.5 1-.82 1.6-1.06.6-.24 1.3-.4 2.3-.45C8.9 2 9.3 2 12 2Zm0 1.8c-2.65 0-2.97 0-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.7.35-1.01.66-.31.31-.5.6-.66 1.01-.12.31-.26.78-.3 1.64C4.32 8.53 4.3 8.85 4.3 11.5v1c0 2.65.02 2.97.07 4.02.04.86.18 1.33.3 1.64.16.41.35.7.66 1.01.31.31.6.5 1.01.66.31.12.78.26 1.64.3 1.05.05 1.37.07 4.02.07h1c2.65 0 2.97-.02 4.02-.07.86-.04 1.33-.18 1.64-.3.41-.16.7-.35 1.01-.66.31-.31.5-.6.66-1.01.12-.31.26-.78.3-1.64.05-1.05.07-1.37.07-4.02v-1c0-2.65-.02-2.97-.07-4.02-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.01 2.7 2.7 0 0 0-1.01-.66c-.31-.12-.78-.26-1.64-.3C15.47 3.82 15.15 3.8 12.5 3.8h-.5Zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3Zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7Zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+       <div class="footer-col">
+      <span class="topic">Company</span>
+      <a href="./about.html">About</a>
+      <a href="blog.html">News</a>
+    </div>
+    <div class="footer-col">
+      <span class="topic">Pages</span>
+      <a href="./">Home</a>
+      <a href="botaki-ba-afrika.html#projects">Projects</a>
+      <a href="bloG">Blog</a>
+    </div>
+    <div class="footer-col">
+      <span class="topic">Contact</span>
+      <a href="mailto:hello@botakibaafrika.co.za">hello@botakibaafrika.co.za</a>
+      <a href="tel:+27110000000">+27 11 000 0000</a>
+      <span class="contact-line">Pretoria, South Africa</span>
+    </div>
+  </div>
+  <div class="wrap footer-map">
+    <iframe src="https://www.google.com/maps?q=Pretoria,+South+Africa&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  var menuToggle = document.querySelector('.menu-toggle');
+  var navLinks = document.querySelector('.nav-links');
+  menuToggle.addEventListener('click', function () {
+    var isOpen = navLinks.classList.toggle('nav-open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-item').forEach(function (item) {
+    var link = item.querySelector('.nav-link');
+    link.addEventListener('click', function (e) {
+      if (window.innerWidth <= 800) {
+        e.preventDefault();
+        item.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

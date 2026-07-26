@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music — Botaki Ba Afrika</title>
+<style>
+  :root {
+    --cream: #EEF0C4;
+    --yellow: #F3B417;
+    --orange: #E97C2C;
+    --brown: #5A2A0C;
+    --green: #163C0A;
+    --ink: #171512;
+    --muted: #6B6858;
+    --card-gray: #C9C9C4;
+    --white: #FDFDF8;
+  }
+
+  @font-face {
+    font-family: 'Lemon Milk';
+    src: url('/fonts/LemonMilk.woff2') format('woff2'),
+         url('/fonts/LemonMilk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Lemon Milk';
+    src: url('/fonts/LemonMilk-Bold.woff2') format('woff2'),
+         url('/fonts/LemonMilk-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Lemon Milk';
+    src: url('/fonts/LemonMilk-ExtraBold.woff2') format('woff2'),
+         url('/fonts/LemonMilk-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avernire Medium';
+    src: url('/fonts/Avernire-Medium.woff2') format('woff2'),
+         url('/fonts/Avernire-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Avernire Medium', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Lemon Milk', Arial, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  img, .ph { display: block; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- HEADER (shared) ---------- */
+  header { background: var(--ink); position: sticky; top: 0; z-index: 50; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+  .brandmark { width: 64px; height: 64px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; }
+  .brandmark svg { width: 32px; height: 32px; }
+  nav { display: flex; align-items: center; gap: 24px; }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-link { color: var(--white); font-size: 13px; letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+  .nav-link.is-active { color: var(--yellow); }
+  .nav-cta { background: var(--white); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; text-transform: uppercase; }
+  .menu-toggle { display: none; background: none; border: none; color: var(--white); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+  .nav-item { position: relative; }
+  .nav-item .caret { width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s ease; }
+  .nav-item:hover .caret, .nav-item.open .caret { transform: rotate(225deg); margin-top: 3px; }
+  .nav-dropdown {
+    position: absolute; top: 100%; left: 0; margin-top: 16px;
+    background: var(--white); color: var(--ink); border-radius: 12px; padding: 10px;
+    min-width: 180px; box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+  .nav-item:hover .nav-dropdown, .nav-item.open .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-dropdown a { display: block; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  .nav-dropdown a:hover { background: var(--cream); }
+
+  @media (max-width: 800px) {
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--ink); flex-direction: column; align-items: flex-start;
+      padding: 20px 32px; gap: 4px;
+    }
+    .nav-links.nav-open { display: flex; }
+    .nav-item { width: 100%; }
+    .nav-item .nav-link { width: 100%; padding: 10px 0; justify-content: space-between; }
+    .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(255,255,255,0.06); width: 100%; margin: 0 0 8px; }
+    .nav-dropdown a { color: var(--white); }
+    .nav-dropdown a:hover { background: rgba(255,255,255,0.1); }
+    .menu-toggle { display: block; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .mu-page * { animation: none !important; } }
+
+  /* =========================================================
+     MUSIC PAGE — namespaced under .mu-page
+  ========================================================= */
+  .mu-page .section { padding: 64px 0; }
+
+  /* ---- hero ---- */
+  .mu-page .mu-hero { padding: 72px 0 48px; }
+  .mu-page .mu-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .mu-page .mu-eyebrow {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+  .mu-page .mu-title {
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .mu-page .mu-title .hl { color: var(--yellow); }
+  .mu-page .mu-hero-copy p { color: var(--muted); font-size: 15px; max-width: 400px; margin-bottom: 24px; }
+  .mu-page .mu-stat-row { display: flex; gap: 28px; }
+  .mu-page .mu-stat .num { font-size: 22px; font-weight: 800; }
+  .mu-page .mu-stat .label { font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* spinning vinyl mark */
+  .mu-page .vinyl-wrap { display: flex; justify-content: center; }
+  .mu-page .vinyl {
+    width: 280px; height: 280px; border-radius: 50%;
+    background:
+      repeating-radial-gradient(circle, rgba(253,253,248,0.06) 0px, rgba(253,253,248,0.06) 1px, transparent 2px, transparent 6px),
+      var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    animation: spin 14s linear infinite;
+    box-shadow: 0 24px 50px -18px rgba(23,21,18,0.45);
+  }
+  .mu-page .vinyl-label {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; flex-direction: column;
+  }
+  .mu-page .vinyl-label span { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: var(--ink); text-transform: uppercase; }
+  .mu-page .vinyl-hole { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); margin-top: 4px; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* ---- statement strip ---- */
+  .mu-page .mu-statement { background: var(--ink); color: var(--white); }
+  .mu-page .mu-statement .wrap { padding: 56px 32px; }
+  .mu-page .mu-statement p {
+    font-size: clamp(20px, 2.6vw, 28px);
+    line-height: 1.4;
+    max-width: 760px;
+    font-weight: 600;
+  }
+  .mu-page .mu-statement .mu-sign { margin-top: 20px; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); }
+
+  /* ---- tracklist (signature element) ---- */
+  .mu-page .mu-gallery-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; gap: 20px; flex-wrap: wrap; }
+  .mu-page .mu-gallery-head p { color: var(--muted); font-size: 14px; max-width: 360px; }
+
+  .mu-page .tracklist { background: var(--white); border-radius: 16px; overflow: hidden; }
+  .mu-page .track-row {
+    display: grid;
+    grid-template-columns: 32px 44px 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid rgba(23,21,18,0.08);
+  }
+  .mu-page .track-row:last-child { border-bottom: none; }
+  .mu-page .track-num { font-size: 13px; color: var(--muted); font-weight: 700; }
+  .mu-page .play-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--cream); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mu-page .play-btn svg { width: 12px; height: 12px; fill: var(--ink); margin-left: 2px; }
+  .mu-page .track-info h3 { font-size: 14.5px; font-weight: 700; }
+  .mu-page .track-info .track-artist { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .mu-page .waveform { display: flex; align-items: flex-end; gap: 2px; height: 24px; width: 90px; }
+  .mu-page .waveform span { width: 3px; background: var(--yellow); border-radius: 2px; }
+  .mu-page .track-tag {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 4px 9px; border-radius: 999px; white-space: nowrap; height: fit-content;
+    background: rgba(243,180,23,0.18); color: var(--brown);
+  }
+  .mu-page .track-dur { font-size: 12.5px; color: var(--muted); min-width: 34px; text-align: right; }
+
+  @media (max-width: 800px) {
+    .mu-page .mu-hero-grid { grid-template-columns: 1fr; }
+    .mu-page .vinyl-wrap { order: -1; }
+    .mu-page .vinyl { width: 200px; height: 200px; }
+    .mu-page .track-row { grid-template-columns: 24px 38px 1fr auto; }
+    .mu-page .waveform { display: none; }
+  }
+
+  /* ---- artist spotlight ---- */
+  .mu-page .spotlight {
+    display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 44px; align-items: center;
+    background: var(--white); border-radius: 18px; padding: 44px;
+  }
+  .mu-page .spotlight .ph { aspect-ratio: 1 / 1; border-radius: 12px; background: var(--card-gray); }
+  .mu-page .spotlight .sp-label { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
+  .mu-page .spotlight h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+  .mu-page .spotlight p.bio { color: var(--muted); font-size: 14.5px; margin-bottom: 16px; }
+  .mu-page .spotlight p.sp-quote { font-style: italic; font-size: 17px; border-left: 3px solid var(--yellow); padding-left: 16px; }
+  @media (max-width: 800px) { .mu-page .spotlight { grid-template-columns: 1fr; padding: 28px; } }
+
+  /* ---- join CTA ---- */
+  .mu-page .mu-cta {
+    background: var(--yellow); color: var(--ink); border-radius: 18px; padding: 44px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+  }
+  .mu-page .mu-cta h2 { font-size: 26px; font-weight: 800; max-width: 460px; }
+  .mu-page .mu-cta p { font-size: 14px; opacity: 0.85; max-width: 420px; margin-top: 6px; }
+  .mu-page .btn { padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; }
+  .mu-page .btn-dark { background: var(--ink); color: var(--white); }
+
+  /* ---------- FOOTER (shared) ---------- */
+  footer { background: var(--ink); color: var(--white); }
+  .footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  .footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
+  .footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
+  .footer-social { display: flex; gap: 12px; }
+  .footer-social a { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+  .footer-social svg { width: 15px; height: 15px; fill: var(--white); }
+  .footer-col span.topic { display: block; font-weight: 700; font-size: 13px; margin-bottom: 14px; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.06em; }
+  .footer-col a { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+  .footer-col .contact-line { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+  .footer-map { margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+  .footer-map iframe { display: block; width: 100%; height: 220px; border: 0; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding: 20px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: rgba(253,253,248,0.6); }
+  @media (max-width: 800px) { .footer-top { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="mu-page">
+
+<header>
+  <div class="header-inner">
+    <a href="#home" class="brandmark1" aria-label="Botaki Ba Afrika">
+      <img src="/BBALogoOrange.svg" alt="Botaki Ba Afrika" width="64" height="64" />
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="./" class="nav-link">Home</a>
+
+        <a href="./disciplines.html" class="nav-link" aria-current="page">Disciplines</a>
+        
+        <div class="nav-item">
+          <a href="#tracklist" class="nav-link">Sounds <span class="caret"></span></a>
+          <div class="nav-dropdown">
+            <a href="#tracklist">Current Tracks</a>
+            <a href="#spotlight">Artist Spotlight</a>
+          </div>
+        </div>
+      </div>
+      <a href="#join" class="nav-cta">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="section mu-hero">
+    <div class="wrap mu-hero-grid">
+      <div class="mu-hero-copy">
+        <div class="mu-eyebrow">Discipline 02 — Music</div>
+        <h1 class="mu-title">Rhythm carries<br>what words <span class="hl">can't</span>.</h1>
+        <p>Botaki Ba Afrika's musicians move between traditional instrumentation and modern production — recording in home studios, performing at collective gatherings, and building a sound that's unmistakably Johannesburg.</p>
+        <div class="mu-stat-row">
+          <div class="mu-stat"><div class="num">14</div><div class="label">Artists</div></div>
+          <div class="mu-stat"><div class="num">32</div><div class="label">Tracks released</div></div>
+          <div class="mu-stat"><div class="num">8</div><div class="label">Live sessions / yr</div></div>
+        </div>
+      </div>
+      <div class="vinyl-wrap">
+        <div class="vinyl">
+          <div class="vinyl-label">
+            <span>Botaki</span>
+            <div class="vinyl-hole"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATEMENT STRIP ===== -->
+  <section class="mu-statement">
+    <div class="wrap">
+      <p>"A song is a room you build for other people to sit in. Ours have space for everyone who's ever been left out of one."</p>
+      <div class="mu-sign">— Music Circle, Botaki Ba Afrika</div>
+    </div>
+  </section>
+
+  <!-- ===== TRACKLIST ===== -->
+  <section class="section" id="tracklist">
+    <div class="wrap">
+      <div class="mu-gallery-head">
+        <div>
+          <h2 class="eyebrow" style="font-size:26px;font-weight:800;text-transform:uppercase;margin-bottom:8px;">Current Tracks</h2>
+          <p>A running playlist from the collective's musicians — pulled from recent releases and live-session recordings.</p>
+        </div>
+      </div>
+
+      <div class="tracklist">
+        <div class="track-row">
+          <div class="track-num">01</div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="track-info"><h3>Amandla Groove</h3><div class="track-artist">Zanele Mahlangu</div></div>
+          <div class="waveform"><span style="height:40%"></span><span style="height:70%"></span><span style="height:100%"></span><span style="height:55%"></span><span style="height:80%"></span><span style="height:35%"></span><span style="height:65%"></span><span style="height:90%"></span><span style="height:45%"></span><span style="height:60%"></span></div>
+          <div class="track-tag">Single</div>
+          <div class="track-dur">3:42</div>
+        </div>
+        <div class="track-row">
+          <div class="track-num">02</div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="track-info"><h3>Township Lullaby</h3><div class="track-artist">Themba Dlamini</div></div>
+          <div class="waveform"><span style="height:30%"></span><span style="height:55%"></span><span style="height:80%"></span><span style="height:40%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:50%"></span><span style="height:70%"></span><span style="height:35%"></span><span style="height:45%"></span></div>
+          <div class="track-tag">EP</div>
+          <div class="track-dur">4:15</div>
+        </div>
+        <div class="track-row">
+          <div class="track-num">03</div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="track-info"><h3>Live at the Yard</h3><div class="track-artist">Zanele Mahlangu &amp; Band</div></div>
+          <div class="waveform"><span style="height:60%"></span><span style="height:35%"></span><span style="height:75%"></span><span style="height:50%"></span><span style="height:95%"></span><span style="height:40%"></span><span style="height:65%"></span><span style="height:30%"></span><span style="height:55%"></span><span style="height:70%"></span></div>
+          <div class="track-tag">Live</div>
+          <div class="track-dur">6:08</div>
+        </div>
+        <div class="track-row">
+          <div class="track-num">04</div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="track-info"><h3>Mother City Blues</h3><div class="track-artist">Lerato Nkuna</div></div>
+          <div class="waveform"><span style="height:45%"></span><span style="height:65%"></span><span style="height:35%"></span><span style="height:85%"></span><span style="height:50%"></span><span style="height:70%"></span><span style="height:40%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:30%"></span></div>
+          <div class="track-tag">Single</div>
+          <div class="track-dur">3:58</div>
+        </div>
+        <div class="track-row">
+          <div class="track-num">05</div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="track-info"><h3>Kasi Symphony</h3><div class="track-artist">Themba Dlamini</div></div>
+          <div class="waveform"><span style="height:55%"></span><span style="height:80%"></span><span style="height:40%"></span><span style="height:65%"></span><span style="height:30%"></span><span style="height:75%"></span><span style="height:50%"></span><span style="height:95%"></span><span style="height:45%"></span><span style="height:60%"></span></div>
+          <div class="track-tag">EP</div>
+          <div class="track-dur">4:44</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARTIST SPOTLIGHT ===== -->
+  <section class="section" id="spotlight">
+    <div class="wrap">
+      <div class="spotlight">
+        <div class="ph" role="img" aria-label="Featured musician portrait placeholder"></div>
+        <div>
+          <div class="sp-label">Artist Spotlight</div>
+          <h3>Zanele Mahlangu</h3>
+          <p class="bio">Zanele blends mbaqanga rhythm sections with contemporary production, writing lyrics in a mix of isiZulu and English. She's been recording with Botaki Ba Afrika's home-studio setup since 2023 and leads the collective's monthly live sessions.</p>
+          <p class="sp-quote">I want people to hear their grandmother's kitchen and their phone's playlist in the same four bars.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JOIN CTA ===== -->
+  <section class="section" id="join">
+    <div class="wrap">
+      <div class="mu-cta">
+        <div>
+          <h2>Are you a musician?</h2>
+          <p>We're looking for singers, instrumentalists, and producers to record, perform, and release with the collective.</p>
+        </div>
+        <button class="btn btn-dark">Submit a demo</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap footer-top">
+    <div class="footer-brand-col">
+      <div class="flogo">BOTAKI BA AFRIKA</div>
+      <p>We are not artists. We are the very ground from which art rises.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5a1.94 1.94 0 1 1 0 3.88 1.94 1.94 0 0 1 0-3.88ZM5 9.5h3.9V19H5V9.5Zm6.1 0h3.74v1.3h.05c.52-.98 1.8-2 3.7-2 3.96 0 4.7 2.6 4.7 6V19h-3.9v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.28-1.88 2.6V19h-3.9V9.5Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.6-1.8-1.8C19 5 12 5 12 5s-7 0-8.8.5c-.9.2-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.6 1.8 1.8C5 19 12 19 12 19s7 0 8.8-.5c.9-.2 1.6-.9 1.8-1.8.4-1.5.4-4.7.4-4.7ZM10 15.2V8.8l6 3.2-6 3.2Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.06 1 .05 1.7.2 2.3.45.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.45 2.3.05 1 .06 1.4.06 4.1s0 3.1-.06 4.1c-.05 1-.2 1.7-.45 2.3a4.3 4.3 0 0 1-1.06 1.6c-.5.5-1 .82-1.6 1.06-.6.24-1.3.4-2.3.45-1 .05-1.4.06-4.1.06s-3.1 0-4.1-.06c-1-.05-1.7-.2-2.3-.45a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.45-2.3C2 15.1 2 14.7 2 12s0-3.1.06-4.1c.05-1 .2-1.7.45-2.3.24-.6.56-1.1 1.06-1.6.5-.5 1-.82 1.6-1.06.6-.24 1.3-.4 2.3-.45C8.9 2 9.3 2 12 2Zm0 1.8c-2.65 0-2.97 0-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.7.35-1.01.66-.31.31-.5.6-.66 1.01-.12.31-.26.78-.3 1.64C4.32 8.53 4.3 8.85 4.3 11.5v1c0 2.65.02 2.97.07 4.02.04.86.18 1.33.3 1.64.16.41.35.7.66 1.01.31.31.6.5 1.01.66.31.12.78.26 1.64.3 1.05.05 1.37.07 4.02.07h1c2.65 0 2.97-.02 4.02-.07.86-.04 1.33-.18 1.64-.3.41-.16.7-.35 1.01-.66.31-.31.5-.6.66-1.01.12-.31.26-.78.3-1.64.05-1.05.07-1.37.07-4.02v-1c0-2.65-.02-2.97-.07-4.02-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.01 2.7 2.7 0 0 0-1.01-.66c-.31-.12-.78-.26-1.64-.3C15.47 3.82 15.15 3.8 12.5 3.8h-.5Zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3Zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7Zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <span class="topic">Company</span>
+      <a href="./about.html">About</a>
+      <a href="blog.html">News</a>
+    </div>
+    <div class="footer-col">
+      <span class="topic">Pages</span>
+      <a href="./">Home</a>
+      <a href="./disciplines.html">Disciplines</a>
+      <a href="./music.html">Music</a>
+    </div>
+    <div class="footer-col">
+      <span class="topic">Contact</span>
+      <a href="mailto:hello@botakibaafrika.co.za">hello@botakibaafrika.co.za</a>
+      <a href="tel:+27110000000">+27 11 000 0000</a>
+      <span class="contact-line">Pretoria, South Africa</span>
+    </div>
+  </div>
+  <div class="wrap footer-map">
+    <iframe src="https://www.google.com/maps?q=Pretoria,+South+Africa&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('nav-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const link = item.querySelector('.nav-link');
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 800) {
+        e.preventDefault();
+        item.classList.toggle('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
