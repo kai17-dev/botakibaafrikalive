@@ -200,7 +200,23 @@ nav { display: flex; align-items: center; gap: 24px; }
 }
 
 /* ---------- FOOTER (shared) ---------- */
-footer { background: var(--ink); color: var(--white); }
+footer {
+  position: relative;
+  background-color: var(--ink);
+  background-image: url('/Resources/Backgrounds/Footer%20BG%20Orange%202.svg');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+}
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 21, 18, 0.85); /* keeps footer text/links readable over the SVG */
+}
+footer > * {
+  position: relative; /* lifts footer content above the ::before overlay */
+}
 .footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
 .footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
 .footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
@@ -232,14 +248,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--yellow); outlin
     </a>
     <nav>
       <div class="nav-links">
-<<<<<<< HEAD
-        <a href="./" class="nav-link">Home</a>
-
-=======
 
         <a href="./" class="nav-link">Home</a>
 
->>>>>>> c053212ad847ce4619701cc94675d5e494ad22d2
         <a href="disciplines.astro" class="nav-link" aria-current="page">Disciplines</a>
 
         <a href="/about" class="nav-link">About</a>
@@ -302,7 +313,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--yellow); outlin
     </div>
     <div class="footer-col">
       <span class="topic">Contact</span>
-      <a href="mailto:info@botakibaafrika.org.za">info@botakibaafrika.org.za</a>
+   <a href="mailto:ona@botakibaafrika.org.za">ona@botakibaafrika.org.za</a>
       <a href="tel:0670931557">067-093-1557</a>
       <span class="contact-line">1005 Arcadia St, Hatfield, Pretoria, 0028</span>
     </div>
@@ -311,7 +322,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--yellow); outlin
     <iframe src="https://www.google.com/maps?q=1005+Arcadia+St,+Hatfield,+Pretoria,+0028&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
   </div>
   <div class="wrap footer-bottom">
-    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved. 201 690 NPO</span>
   </div>
 </footer>
 

@@ -1,10 +1,10 @@
-# TODO - Sponsor Strip Makeover
+# TODO - Fix Disciplines Button
 
 ## Steps
-- [x] Analyze sponsor strip section in `src/pages/index.astro`
-- [x] Get plan approved by user
-- [x] Update `.sponsor-logo` size (height: 52px → 80px, max-width: 150px → 220px)
-- [x] Update `.marquee-track` gap (56px → 80px)
-- [x] Update `.marquee-strip` padding (28px → 36px)
-- [x] Verify the changes render correctly
-
+- [ ] Fix malformed Disciplines nav link (missing `</a>`) in `src/pages/disciplines.astro`
+- [ ] Update discipline selector links on `disciplines.astro` to Astro routes (`/visual-arts`, `/music`, `/literature`)
+- [ ] Convert `visualArts.html` -> `src/pages/visual-arts.astro` (Astro route, update internal links)
+- [ ] Convert `music.html` -> `src/pages/music.astro` (Astro route, update internal links)
+- [ ] Convert `literature.html` -> `src/pages/literature.astro` (Astro route, update internal links)
+- [ ] Run `astro build` to confirm the site builds successfully
+- [ ] Verify the Disciplines navigation works

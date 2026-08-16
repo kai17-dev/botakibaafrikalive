@@ -107,6 +107,18 @@ nav { display: flex; align-items: center; gap: 18px; }
   .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(255,255,255,0.06); width: 100%; margin: 0 0 8px; }
   .nav-dropdown a { color: var(--white); }
   .nav-dropdown a:hover { background: rgba(255,255,255,0.1); }
+
+  /* --- NEW: tighter header + smaller buttons on mobile --- */
+  .header-inner { padding: 14px 16px; }
+  nav { gap: 8px; }
+  .nav-cta, .nav-d {
+    padding: 8px 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+  }
+  .menu-toggle { font-size: 11px; margin-left: 2px; }
+  .btn { padding: 10px 16px; font-size: 12px; }
+  .btn-row { flex-wrap: wrap; }
 }
 
 /* ---------- HERO  ---------- */
@@ -748,7 +760,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   </video>
 </section>
 
-<!-- ============ SPONSORS STRIP ============ -->
+<!-- ============ sponsors STRIP ============ -->
 <div class="marquee-strip" aria-label="Our sponsors">
   <div class="wrap">
     <p class="marquee-label">Supported By</p>
@@ -756,19 +768,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   <div class="marquee-track">
     <!-- Add your sponsor logos here. Duplicate the whole set once so the loop is seamless (already done below with SET 2). -->
     <!-- SET 1 -->
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/Department_of_Sport,_Arts_and_Culture.webp" alt="Department of Sport, Arts and Culture" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/GautengSport-Arts-Culture-and-Recreation.webp" alt="Gauteng Sport, Arts, Culture and Recreation" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/javettUP.webp" alt="Javett-UP Art Centre" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/mialogo.webp" alt="MIA" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/NAC_LOGO.webp" alt="National Arts Council" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/National_Lottery_Commission.webp" alt="National Lottery Commission" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/Department_of_Sport,_Arts_and_Culture.webp" alt="Department of Sport, Arts and Culture" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/GautengSport-Arts-Culture-and-Recreation.webp" alt="Gauteng Sport, Arts, Culture and Recreation" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/javettUP.webp" alt="Javett-UP Art Centre" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/mialogo.webp" alt="MIA" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/NAC_LOGO.webp" alt="National Arts Council" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/National_Lottery_Commission.webp" alt="National Lottery Commission" loading="lazy" decoding="async"></div>
     <!-- SET 2 (duplicate of SET 1, required for the seamless scroll — keep in sync) -->
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/Department_of_Sport,_Arts_and_Culture.webp" alt="Department of Sport, Arts and Culture" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/GautengSport-Arts-Culture-and-Recreation.webp" alt="Gauteng Sport, Arts, Culture and Recreation" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/javettUP.webp" alt="Javett-UP Art Centre" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/mialogo.webp" alt="MIA" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/NAC_LOGO.webp" alt="National Arts Council" loading="lazy" decoding="async"></div>
-    <div class="sponsor-logo"><img src="/public/Resources/sponsers/National_Lottery_Commission.webp" alt="National Lottery Commission" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/Department_of_Sport,_Arts_and_Culture.webp" alt="Department of Sport, Arts and Culture" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/GautengSport-Arts-Culture-and-Recreation.webp" alt="Gauteng Sport, Arts, Culture and Recreation" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/javettUP.webp" alt="Javett-UP Art Centre" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/mialogo.webp" alt="MIA" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/NAC_LOGO.webp" alt="National Arts Council" loading="lazy" decoding="async"></div>
+    <div class="sponsor-logo"><img src="/Resources/sponsors/National_Lottery_Commission.webp" alt="National Lottery Commission" loading="lazy" decoding="async"></div>
   </div>
 </div>
 
@@ -1028,7 +1040,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     </div>
     <div class="footer-col">
       <span class="topic">Contact</span>
-      <a href="mailto:info@botakibaafrika.org.za">info@botakibaafrika.org.za</a>
+      <a href="mailto:ona@botakibaafrika.org.za">ona@botakibaafrika.org.za</a>
       <a href="tel:0670931557">067-093-1557</a>
       <span class="contact-line">1005 Arcadia St, Hatfield, Pretoria, 0028</span>
     </div>
@@ -1037,7 +1049,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     <iframe src="https://www.google.com/maps?q=1005+Arcadia+St,+Hatfield,+Pretoria,+0028&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
   </div>
   <div class="wrap footer-bottom">
-    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved. 201 690 NPO</span>
   </div>
 </footer>
 

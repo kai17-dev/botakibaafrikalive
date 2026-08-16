@@ -97,17 +97,34 @@ nav { display: flex; align-items: center; gap: 24px; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: var(--brownxorange), var(--brownxorange);
+  background-color: var(--brownxorange);
+  background-image: url('/Resources/Info%20Tab%20Bg%20Design/Design%202.svg');
   background-size: cover;
   background-position: center;
   z-index: 0;
 }
+
 .hero-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(23,21,18,0.55), rgba(23,21,18,0.75));
 }
+.story-section {
+  position: relative;
+  background-color: var(--black);
+  background-image: url('/Resources/Info%20Tab%20Bg%20Design/Design%202.svg');
+  background-size: cover;
+  background-position: center;
+}
+#who-are-we {
+  position: relative;
+  background-color: var(--black);
+  background-image: url('/Resources/Info%20Tab%20Bg%20Design/Design%201.svg');
+  background-size: cover;
+  background-position: center;
+}
+
 .about-hero .wrap { position: relative; z-index: 1; }
 .about-hero .eyebrow { color: var(--orange); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
 .about-hero h1 { font-size: clamp(34px, 5.5vw, 52px); font-weight: 800; margin-bottom: 16px; color: var(--white); }
@@ -178,7 +195,23 @@ nav { display: flex; align-items: center; gap: 24px; }
 .cta-inner h2 { font-size: 28px; font-weight: 800; max-width: 460px; }
 
 /* ---------- FOOTER ---------- */
-footer { background: var(--ink); color: var(--white); }
+footer {
+  position: relative;
+  background-color: var(--ink);
+  background-image: url('/Resources/Backgrounds/Footer%20BG%20Orange%202.svg');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+}
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 21, 18, 0.85); /* keeps footer text/links readable over the SVG */
+}
+footer > * {
+  position: relative; /* lifts footer content above the ::before overlay */
+}
 .footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
 .footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
 .footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
@@ -379,11 +412,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     <nav>
       <div class="nav-links">
         <a href="/" class="nav-link">Home</a>
-<<<<<<< HEAD
-=======
 
         <a href="/disciplines" class="nav-link">Disciplines</a>
->>>>>>> 223cdf6 (0808changes)
         <a href="/about" class="nav-link" aria-current="page">About</a>
         <!--<a href="./bloG.astro" class="nav-link">News</a>-->
       </div>
@@ -403,8 +433,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
       <p>Botaki Ba Afrika is a collective, not a gallery. Every piece we make belongs to the group before it belongs to any one artist.</p>
     </div>
   </section>
-
-  <section class="section">
+  
+<section class="section story-section">
     <div class="wrap story-grid">
       <div class="story-copy">
         <div class="eyebrow">Our story</div>
@@ -513,7 +543,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     <div class="wrap cta-inner">
       <h2>Want to join the collective or collaborate on a project?</h2>
       <div class="btn-row">
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#contact" class="bt n btn-primary">Get in touch</a>
         <a href="blog.html" class="btn btn-secondary">Read our journal</a>
       </div>
     </div>
@@ -546,7 +576,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     </div>
     <div class="footer-col">
       <span class="topic">Contact</span>
-      <a href="mailto:info@botakibaafrika.org.za">info@botakibaafrika.org.za</a>
+      <a href="mailto:ona@botakibaafrika.org.za">ona@botakibaafrika.org.za</a>
       <a href="tel:0670931557">067-093-1557</a>
       <span class="contact-line">1005 Arcadia St, Hatfield, Pretoria, 0028</span>
     </div>
@@ -555,7 +585,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
     <iframe src="https://www.google.com/maps?q=1005+Arcadia+St,+Hatfield,+Pretoria,+0028&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
   </div>
   <div class="wrap footer-bottom">
-    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved. 201 690 NPO
+      
+    </span>
   </div>
 </footer>
 
