@@ -54,7 +54,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Avernire Medium', Arial, sans-serif;
-    background: var(--cream);
+    background: var(--white);
     color: var(--ink);
     line-height: 1.5;
   }
@@ -73,6 +73,7 @@
   .nav-link { color: var(--white); font-size: 13px; letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
   .nav-link.is-active { color: var(--orange); }
   .nav-cta { background: var(--white); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; text-transform: uppercase; }
+  .nav-d { background: var(--orange); color: var(--white); padding: 10px 18px; border-radius: 999px; font-size: 12px; letter-spacing: 0.06em; font-weight: 700; text-transform: uppercase; }
   .menu-toggle { display: none; background: none; border: none; color: var(--white); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
   .nav-item { position: relative; }
   .nav-item .caret { width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s ease; }
@@ -101,6 +102,12 @@
     .nav-dropdown a { color: var(--white); }
     .nav-dropdown a:hover { background: rgba(255,255,255,0.1); }
     .menu-toggle { display: block; }
+
+    /* smaller header buttons on mobile */
+    .header-inner { padding: 14px 16px; }
+    nav { gap: 8px; }
+    .nav-cta, .nav-d { padding: 8px 12px; font-size: 10.5px; letter-spacing: 0.04em; }
+    .menu-toggle { font-size: 11px; margin-left: 2px; }
   }
 
   a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -116,8 +123,18 @@
   .va-page .section { padding: 64px 0; }
 
   /* ---- discipline hero ---- */
-  .va-page .va-hero { padding: 72px 0 48px; }
+  .va-page .va-hero {
+    padding: 72px 0 48px;
+    position: relative;
+    background-color: var(--white);
+    background-image: url("/Resources/Backgrounds/Main%20BG%20Orange.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
   .va-page .va-hero-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1.1fr;
     gap: 48px;
@@ -172,11 +189,31 @@
   }
 
   /* ---- statement strip ---- */
+  /* Smooth fade transition for the statement quote & author */
+.va-page .va-statement .wrap {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.va-page .va-statement .wrap.fade-out {
+  opacity: 0;
+  transform: translateY(-4px);
+}
   .va-page .va-statement {
-    background: var(--ink);
+    position: relative;
+    background-color: var(--ink);
+    background-image: url("/Resources/Backgrounds/Banner%20BG%20Orange.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     color: var(--white);
+    overflow: hidden;
   }
-  .va-page .va-statement .wrap { padding: 56px 32px; }
+  .va-page .va-statement::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 21, 18, 0.75); /* keeps the quote readable over the SVG */
+  }
+  .va-page .va-statement .wrap { position: relative; z-index: 1; padding: 56px 32px; }
   .va-page .va-statement p {
     font-family: Georgia, serif;
     font-size: clamp(20px, 2.6vw, 28px);
@@ -192,6 +229,15 @@
   }
 
   /* ---- gallery wall (mosaic, matted frames) ---- */
+  .va-page #gallery {
+    position: relative;
+    background-color: var(--white);
+    background-image: url("/Resources/Backgrounds/Art%20Projects%20BG%20Black%202.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  .va-page #gallery .wrap { position: relative; z-index: 1; }
   .va-page .va-gallery-head {
     display: flex;
     justify-content: space-between;
@@ -243,6 +289,11 @@
     .va-page .va-hero-grid { grid-template-columns: 1fr; }
     .va-page .va-frame { transform: none; margin-top: 8px; }
     .va-page .gallery-wall { columns: 1 100%; }
+
+    /* SVG backgrounds zoomed/repositioned so they read well on narrow screens */
+    .va-page .va-hero { background-size: 150% auto; background-position: center top; }
+    .va-page .va-statement { background-size: 200% auto; background-position: center center; }
+    .va-page #gallery { background-size: 220% auto; background-position: center center; }
   }
 
   /* ---- featured artist spotlight ---- */
@@ -251,7 +302,7 @@
     grid-template-columns: 0.85fr 1.15fr;
     gap: 44px;
     align-items: center;
-    background: var(--white);
+    background: var(--yellow);
     border-radius: 18px;
     padding: 44px;
   }
@@ -261,16 +312,16 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--white);
     margin-bottom: 10px;
   }
   .va-page .spotlight h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
-  .va-page .spotlight p.bio { color: var(--muted); font-size: 14.5px; margin-bottom: 16px; }
+  .va-page .spotlight p.bio { color: var(--white); font-size: 14.5px; margin-bottom: 16px; }
   .va-page .spotlight p.sp-quote {
     font-family: Georgia, serif;
     font-style: italic;
     font-size: 17px;
-    border-left: 3px solid var(--orange);
+    border-left: 3px solid var(--white);
     padding-left: 16px;
   }
   @media (max-width: 800px) {
@@ -294,48 +345,173 @@
   .va-page .btn { padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; }
   .va-page .btn-dark { background: var(--ink); color: var(--white); }
 
-  /* ---------- FOOTER (shared) ---------- */
-  footer { background: var(--ink); color: var(--white); }
-  .footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
-  .footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
-  .footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
-  .footer-social { display: flex; gap: 12px; }
-  .footer-social a { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
-  .footer-social svg { width: 15px; height: 15px; fill: var(--white); }
-  .footer-col span.topic { display: block; font-weight: 700; font-size: 13px; margin-bottom: 14px; color: var(--yellow); text-transform: uppercase; letter-spacing: 0.06em; }
-  .footer-col a { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
-  .footer-col .contact-line { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
-  .footer-map { margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
-  .footer-map iframe { display: block; width: 100%; height: 220px; border: 0; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding: 20px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: rgba(253,253,248,0.6); }
+  /* smaller buttons across the page on mobile */
+  @media (max-width: 800px) {
+    .va-page .btn { padding: 10px 16px; font-size: 12px; }
+  }
+
+  /* ============================================================
+   BACK TO TOP BUTTON
+   Fixed at bottom-right, hidden until the person nears the
+   bottom of the page (see script at end of body).
+   ============================================================ */
+  .back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 24px -8px rgba(23,21,18,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 60;
+  }
+  .back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .back-to-top svg { width: 18px; height: 18px; }
+  @media (max-width: 800px) {
+    .back-to-top { width: 38px; height: 38px; right: 16px; bottom: 16px; }
+    .back-to-top svg { width: 15px; height: 15px; }
+  }
+
+  /* ============================================================
+   DONATE MODAL
+   ============================================================ */
+.donate-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 15, 5, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.donate-modal-overlay.is-open { display: flex; }
+.donate-modal {
+  position: relative;
+  background-color: var(--white);
+  background-image: url("/Resources/Info%20Tab%20Bg%20Design/Design%201.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 3px solid var(--white);
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  padding: 32px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  animation: event-modal-pop 0.25s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.donate-modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 28px; line-height: 1; color: var(--brown, #5A2A0C); cursor: pointer; }
+.donate-modal-eyebrow { font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: var(--orange, #E97C2C); margin-bottom: 6px; }
+.donate-modal h3 { font-family: 'Lemon Milk', Arial, sans-serif; font-size: 24px; margin: 0 0 6px; color: var(--brown, #5A2A0C); }
+.donate-modal-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+
+.donate-tabs { display: flex; gap: 8px; margin-bottom: 20px; background: rgba(0, 0, 0, 0.05); padding: 4px; border-radius: 999px; }
+.donate-tab { flex: 1; padding: 8px 14px; border-radius: 999px; border: none; background: transparent; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; color: var(--ink); transition: all 0.2s ease; }
+.donate-tab.active { background: var(--ink); color: var(--white); }
+
+.donate-panel { display: none; }
+.donate-panel.active { display: block; }
+.donate-info-box { background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(23, 21, 18, 0.1); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.donate-label { display: block; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; color: var(--green, #163C0A); margin-bottom: 8px; }
+.donate-details { font-size: 13.5px; color: var(--brown, #5A2A0C); line-height: 1.5; }
+.donate-desc { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.donate-list { padding-left: 18px; font-size: 13px; color: var(--ink); }
+.donate-list li { margin-bottom: 6px; }
+.donate-cta { width: 100%; text-align: center; margin-top: 8px; }
+
+/* smaller donate modal buttons/tabs on mobile */
+@media (max-width: 800px) {
+  .donate-tab { padding: 7px 10px; font-size: 11px; }
+  .donate-cta { padding: 10px 16px; font-size: 12px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background-color: var(--ink);
+  background-image: url("/Resources/Backgrounds/Footer%20BG%20Orange%202.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: var(--white);
+  position: relative;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 21, 18, 0.85); /* keeps footer text/links readable over the SVG */
+}
+footer > * { position: relative; z-index: 1; } /* lifts content above the ::before overlay */
+
+.footer-top { padding: 56px 0 40px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.footer-brand-col .flogo { font-weight: 800; letter-spacing: 0.05em; font-size: 20px; margin-bottom: 12px; }
+.footer-brand-col p { color: rgba(253,253,248,0.6); font-size: 13px; max-width: 240px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+.footer-social svg { width: 15px; height: 15px; fill: var(--white); }
+.footer-col span.topic { display: block; font-weight: 700; font-size: 13px; margin-bottom: 14px; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; }
+.footer-col a { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+.footer-col .contact-line { display: block; font-size: 13px; opacity: 0.8; margin-bottom: 10px; }
+.footer-map { margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+.footer-map iframe { display: block; width: 100%; height: 220px; border: 0; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding: 20px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: rgba(253,253,248,0.6); }
 
   @media (max-width: 800px) {
     .footer-top { grid-template-columns: 1fr; }
+    footer { background-size: 200% auto; background-position: center top; }
   }
 </style>
+<link rel="icon" type="image/svg+xml" href="/Resources/Logo/Iconmark/BBA%20Logo%20Icon%20Orange(%23F48030).svg" />
+<link rel="apple-touch-icon" href="/Resources/Logo/Iconmark/BBA%20Logo%20Icon%20Orange(%23F48030).svg" />
 </head>
 <body class="va-page">
 
+<!-- ================================================================
+     HEADER
+     ================================================================ -->
 <header>
   <div class="header-inner">
-    <a href="#home" class="brandmark1" aria-label="Botaki Ba Afrika">
-      <img src="/BBALogoOrange.svg" alt="Botaki Ba Afrika" width="64" height="64" />
+    <a href="/" class="brandmark1" aria-label="Botaki Ba Afrika">
+    <img src="/BBALogoWhite.svg" alt="Botaki Ba Afrika" width="100" height="90" />
     </a>
     <nav>
       <div class="nav-links">
         <a href="/" class="nav-link">Home</a>
-
-        <a href="/disciplines" class="nav-link" aria-current="page">Disciplines</a>
-        
-        <div class="nav-item">
-          <a href="#gallery" class="nav-link">Gallery <span class="caret"></span></a>
+        <a href="/disciplines" class="nav-link">Disciplines</a>
+        <a href="/about" class="nav-link">About</a>
+        <!--<div class="nav-item">
+          <a href="#projects" class="nav-link">Projects <span class="caret"></span></a>
           <div class="nav-dropdown">
-            <a href="#gallery">Current Works</a>
-            <a href="#spotlight">Artist Spotlight</a>
+            <a href="#projects">Art Projects</a>
+            <a href="#artist">Artists</a>
           </div>
         </div>
+        <a href="./bloG.html" class="nav-link">Blog</a>
+        <a href="#news" class="nav-link">News</a> -->
       </div>
-      <a href="#join" class="nav-cta">Contact</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+      <a href="#donate" class="nav-d">Donate</a>
     </nav>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
   </div>
@@ -347,9 +523,9 @@
   <section class="section va-hero">
     <div class="wrap va-hero-grid">
       <div class="va-hero-copy">
-        <div class="va-eyebrow">Discipline 01 — Visual Art</div>
+        <div class="va-eyebrow">Botaki Ba Pono — Visual Arts</div>
         <h1 class="va-title">Line, colour,<br>and <em>witness</em>.</h1>
-        <p>The visual artists of Botaki Ba Afrika work in paint, ink, textile, and found material — each piece a record of a place, a person, or a moment the artist refused to let pass unmarked.</p>
+        <p>Botaki Ba Pono is the visual art aspect of Botaki Ba Afrika, a dynamic department dedicated to nurturing artistic talent, deepening technical skill, and cultivating a sustainable creative economy for visual artists. Rooted in both craftsmanship and professional growth, this department exists to develop emerging artists who are equipped to thrive within any ecosystem.</p>
         <div class="va-stat-row">
           <div class="va-stat"><div class="num">18</div><div class="label">Artists</div></div>
           <div class="va-stat"><div class="num">120+</div><div class="label">Works exhibited</div></div>
@@ -363,13 +539,14 @@
     </div>
   </section>
 
+
   <!-- ===== STATEMENT STRIP ===== -->
-  <section class="va-statement">
-    <div class="wrap">
-      <p>&ldquo;We do not paint to decorate a wall. We paint because the wall was empty of us, and it was time it wasn't.&rdquo;</p>
-      <div class="va-sign">— Visual Art Circle, Botaki Ba Afrika</div>
-    </div>
-  </section>
+<section class="va-statement">
+  <div class="wrap" id="quote-container">
+    <p id="quote-text">&ldquo;We do not paint to decorate a wall. We paint because the wall was empty of us, and it was time it wasn't.&rdquo;</p>
+    <div class="va-sign" id="quote-author">— Visual Art Circle, Botaki Ba Afrika</div>
+  </div>
+</section>
 
   <!-- ===== GALLERY WALL ===== -->
   <section class="section" id="gallery">
@@ -377,7 +554,7 @@
       <div class="va-gallery-head">
         <div>
           <h2 class="eyebrow" style="font-size:26px;font-weight:800;text-transform:uppercase;margin-bottom:8px;">Current Works</h2>
-          <p>A rotating selection from the collective's visual artists — sourced from recent studio sessions and group shows around Johannesburg.</p>
+          <p>A rotating selection from the collective's visual artists sourced from recent studio sessions and group shows around Pretoria.</p>
         </div>
       </div>
 
@@ -450,7 +627,7 @@
         <div>
           <div class="sp-label">Artist Spotlight</div>
           <h3>Naledi Khumalo</h3>
-          <p class="bio">Naledi paints domestic interiors — kitchens, yards, half-lit hallways — treating the ordinary rooms of Black South African life as subjects worthy of a gallery wall. She has shown work at three Botaki Ba Afrika group exhibitions since joining the collective in 2024.</p>
+          <p class="bio">Naledi paints domestic interiors kitchens, yards, half-lit hallways treating the ordinary rooms of Black South African life as subjects worthy of a gallery wall. She has shown work at three Botaki Ba Afrika group exhibitions since joining the collective in 2024.</p>
           <p class="sp-quote">I paint the rooms nobody photographs. That's where the real story sits.</p>
         </div>
       </div>
@@ -472,43 +649,172 @@
 
 </main>
 
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
 <footer id="contact">
   <div class="wrap footer-top">
     <div class="footer-brand-col">
       <div class="flogo">BOTAKI BA AFRIKA</div>
       <p>We are not artists. We are the very ground from which art rises.</p>
       <div class="footer-social">
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5a1.94 1.94 0 1 1 0 3.88 1.94 1.94 0 0 1 0-3.88ZM5 9.5h3.9V19H5V9.5Zm6.1 0h3.74v1.3h.05c.52-.98 1.8-2 3.7-2 3.96 0 4.7 2.6 4.7 6V19h-3.9v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.28-1.88 2.6V19h-3.9V9.5Z"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.6-1.8-1.8C19 5 12 5 12 5s-7 0-8.8.5c-.9.2-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.6 1.8 1.8C5 19 12 19 12 19s7 0 8.8-.5c.9-.2 1.6-.9 1.8-1.8.4-1.5.4-4.7.4-4.7ZM10 15.2V8.8l6 3.2-6 3.2Z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.06 1 .05 1.7.2 2.3.45.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.45 2.3.05 1 .06 1.4.06 4.1s0 3.1-.06 4.1c-.05 1-.2 1.7-.45 2.3a4.3 4.3 0 0 1-1.06 1.6c-.5.5-1 .82-1.6 1.06-.6.24-1.3.4-2.3.45-1 .05-1.4.06-4.1.06s-3.1 0-4.1-.06c-1-.05-1.7-.2-2.3-.45a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.45-2.3C2 15.1 2 14.7 2 12s0-3.1.06-4.1c.05-1 .2-1.7.45-2.3.24-.6.56-1.1 1.06-1.6.5-.5 1-.82 1.6-1.06.6-.24 1.3-.4 2.3-.45C8.9 2 9.3 2 12 2Zm0 1.8c-2.65 0-2.97 0-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.7.35-1.01.66-.31.31-.5.6-.66 1.01-.12.31-.26.78-.3 1.64C4.32 8.53 4.3 8.85 4.3 11.5v1c0 2.65.02 2.97.07 4.02.04.86.18 1.33.3 1.64.16.41.35.7.66 1.01.31.31.6.5 1.01.66.31.12.78.26 1.64.3 1.05.05 1.37.07 4.02.07h1c2.65 0 2.97-.02 4.02-.07.86-.04 1.33-.18 1.64-.3.41-.16.7-.35 1.01-.66.31-.31.5-.6.66-1.01.12-.31.26-.78.3-1.64.05-1.05.07-1.37.07-4.02v-1c0-2.65-.02-2.97-.07-4.02-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.01 2.7 2.7 0 0 0-1.01-.66c-.31-.12-.78-.26-1.64-.3C15.47 3.82 15.15 3.8 12.5 3.8h-.5Zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3Zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7Zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg></a>
+        <!--<a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5a1.94 1.94 0 1 1 0 3.88 1.94 1.94 0 0 1 0-3.88ZM5 9.5h3.9V19H5V9.5Zm6.1 0h3.74v1.3h.05c.52-.98 1.8-2 3.7-2 3.96 0 4.7 2.6 4.7 6V19h-3.9v-4.9c0-1.17-.02-2.68-1.63-2.68-1.63 0-1.88 1.28-1.88 2.6V19h-3.9V9.5Z"/></svg></a>-->
+        <a href="https://youtube.com/@botakibaafrika7359?si=slrP3F14p_YT6aVA" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.6-1.8-1.8C19 5 12 5 12 5s-7 0-8.8.5c-.9.2-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.6 1.8 1.8C5 19 12 19 12 19s7 0 8.8-.5c.9-.2 1.6-.9 1.8-1.8.4-1.5.4-4.7.4-4.7ZM10 15.2V8.8l6 3.2-6 3.2Z"/></svg></a>
+        <a href="https://www.instagram.com/botakibaafrika?igsh=M25tdGg5bHY3NzFp" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.06 1 .05 1.7.2 2.3.45.6.24 1.1.56 1.6 1.06.5.5.82 1 1.06 1.6.24.6.4 1.3.45 2.3.05 1 .06 1.4.06 4.1s0 3.1-.06 4.1c-.05 1-.2 1.7-.45 2.3a4.3 4.3 0 0 1-1.06 1.6c-.5.5-1 .82-1.6 1.06-.6.24-1.3.4-2.3.45-1 .05-1.4.06-4.1.06s-3.1 0-4.1-.06c-1-.05-1.7-.2-2.3-.45a4.3 4.3 0 0 1-1.6-1.06 4.3 4.3 0 0 1-1.06-1.6c-.24-.6-.4-1.3-.45-2.3C2 15.1 2 14.7 2 12s0-3.1.06-4.1c.05-1 .2-1.7.45-2.3.24-.6.56-1.1 1.06-1.6.5-.5 1-.82 1.6-1.06.6-.24 1.3-.4 2.3-.45C8.9 2 9.3 2 12 2Zm0 1.8c-2.65 0-2.97 0-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.7.35-1.01.66-.31.31-.5.6-.66 1.01-.12.31-.26.78-.3 1.64C4.32 8.53 4.3 8.85 4.3 11.5v1c0 2.65.02 2.97.07 4.02.04.86.18 1.33.3 1.64.16.41.35.7.66 1.01.31.31.6.5 1.01.66.31.12.78.26 1.64.3 1.05.05 1.37.07 4.02.07h1c2.65 0 2.97-.02 4.02-.07.86-.04 1.33-.18 1.64-.3.41-.16.7-.35 1.01-.66.31-.31.5-.6.66-1.01.12-.31.26-.78.3-1.64.05-1.05.07-1.37.07-4.02v-1c0-2.65-.02-2.97-.07-4.02-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.01 2.7 2.7 0 0 0-1.01-.66c-.31-.12-.78-.26-1.64-.3C15.47 3.82 15.15 3.8 12.5 3.8h-.5Zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3Zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7Zm5.35-1.98a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg></a>
       </div>
     </div>
     <div class="footer-col">
       <span class="topic">Company</span>
       <a href="/about">About</a>
-      <a href="/news">News</a>
+      <!--<a href="blog.html">News</a>-->
     </div>
     <div class="footer-col">
       <span class="topic">Pages</span>
       <a href="/">Home</a>
-      <a href="/disciplines">Disciplines</a>
-      <a href="/visual-arts">Visual Art</a>
+      <!--<a href="botaki-ba-afrika.html#projects">Projects</a>
+      <a href="./bloG.astro">Blog</a>-->
     </div>
     <div class="footer-col">
       <span class="topic">Contact</span>
-      <a href="mailto:hello@botakibaafrika.co.za">hello@botakibaafrika.co.za</a>
-      <a href="tel:+27110000000">+27 11 000 0000</a>
-      <span class="contact-line">Pretoria, South Africa</span>
+      <a href="mailto:ona@botakibaafrika.org.za">ona@botakibaafrika.org.za</a>
+      <a href="tel:0670931557">067-093-1557</a>
+      <span class="contact-line">1005 Arcadia St, Hatfield, Pretoria, 0028</span>
     </div>
   </div>
   <div class="wrap footer-map">
-    <iframe src="https://www.google.com/maps?q=Pretoria,+South+Africa&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
+    <iframe src="https://www.google.com/maps?q=1005+Arcadia+St,+Hatfield,+Pretoria,+0028&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Botaki Ba Afrika location"></iframe>
   </div>
   <div class="wrap footer-bottom">
-    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved.</span>
+    <span>Copyright &copy; 2026 Botaki Ba Afrika. All rights reserved. 201-609 NPO PBO 930 061 709</span>
   </div>
 </footer>
+
+<!-- ================================================================
+     BACK TO TOP BUTTON
+     Hidden until the person scrolls near the bottom of the page
+     (see script below).
+     ================================================================ -->
+<button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</button>
+
+<!-- ================================================================
+     DONATE MODAL
+     ================================================================ -->
+<div class="donate-modal-overlay" id="donate-modal-overlay">
+  <div class="donate-modal" role="dialog" aria-modal="true" aria-labelledby="donate-modal-title">
+    <button type="button" class="donate-modal-close" id="donate-modal-close" aria-label="Close">&times;</button>
+
+    <div class="donate-modal-eyebrow">Support The Collective</div>
+    <h3 id="donate-modal-title">Donate to Botaki</h3>
+    <p class="donate-modal-subtitle">Choose how you would like to contribute to keeping the craft alive.</p>
+
+    <div class="donate-tabs">
+      <button type="button" class="donate-tab active" data-donate-target="donate-monetary">Monetary</button>
+      <button type="button" class="donate-tab" data-donate-target="donate-supplies">Art &amp; Gear</button>
+    </div>
+
+    <!-- Option A: Monetary donation -->
+    <div class="donate-panel active" id="donate-monetary">
+      <div class="donate-info-box">
+        <span class="donate-label">Direct Bank Transfer (EFT)</span>
+        <div class="donate-details">
+          <p><strong>Bank:</strong> First National Bank (FNB)</p>
+          <p><strong>Account Name:</strong> Botaki Ba Afrika</p>
+          <p><strong>Account Number:</strong> 62000000000</p>
+          <p><strong>Branch Code:</strong> 250655</p>
+          <p><strong>Reference:</strong> Donate + Your Name</p>
+        </div>
+      </div>
+
+      <a href="https://pay.yoco.com/botakibaafrika" target="_blank" rel="noopener noreferrer" class="btn btn-primary donate-cta">
+        Donate Online via Card (Yoco)
+      </a>
+    </div>
+
+    <!-- Option B: Art supplies & physical gear -->
+    <div class="donate-panel" id="donate-supplies">
+      <div class="donate-info-box">
+        <span class="donate-label">Physical Contributions</span>
+        <p class="donate-desc">We welcome physical drop-offs for materials that nourish our collective disciplines:</p>
+        <ul class="donate-list">
+          <li><strong>Visual Arts:</strong> Canvases, acrylic paints, brushes, clay, beads, textiles.</li>
+          <li><strong>Music:</strong> Instruments, audio cables, mic stands, percussion gear.</li>
+          <li><strong>Literature:</strong> Books for our library, notebooks, printing paper.</li>
+        </ul>
+      </div>
+
+      <div class="donate-info-box" style="margin-top: 12px;">
+        <span class="donate-label">Drop-off Address</span>
+        <p class="donate-details">1005 Arcadia St, Hatfield, Pretoria, 0028</p>
+        <p class="donate-details" style="margin-top: 4px;"><strong>Contact prior to drop-off:</strong> info@botakibaafrika.org.za</p>
+      </div>
+
+      <a href="mailto:info@botakibaafrika.org.za?subject=Art%20Supplies%20Donation" class="btn btn-secondary donate-cta" id="dropoff-btn">
+        Arrange a Drop-off
+      </a>
+      <p id="dropoff-feedback" style="font-size:12px;color:var(--muted);margin-top:8px;text-align:center;display:none;">Email copied — opening your mail app…</p>
+    </div>
+  </div>
+</div>
+<!-- ================================================================
+     SCRIPT: Donate Modal
+     ================================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const donateBtn = document.querySelector('.nav-d[href="#donate"]');
+  const donateModal = document.getElementById('donate-modal-overlay');
+  const closeDonateBtn = document.getElementById('donate-modal-close');
+
+  // Open modal when clicking the header "Donate" button
+  donateBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    donateModal?.classList.add('is-open');
+  });
+
+  // Close modal handlers
+  const closeDonateModal = () => donateModal?.classList.remove('is-open');
+  closeDonateBtn?.addEventListener('click', closeDonateModal);
+  donateModal?.addEventListener('click', (e) => {
+    if (e.target === donateModal) closeDonateModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && donateModal?.classList.contains('is-open')) {
+      closeDonateModal();
+    }
+  });
+
+  // Tab switching inside Donate Modal
+  const donateTabs = document.querySelectorAll('.donate-tab');
+  const donatePanels = document.querySelectorAll('.donate-panel');
+  donateTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      donateTabs.forEach(t => t.classList.remove('active'));
+      donatePanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const targetId = tab.getAttribute('data-donate-target');
+      document.getElementById(targetId)?.classList.add('active');
+    });
+  });
+
+  // "Arrange a drop-off" — copy email as fallback if no default mail app is set
+  const dropoffBtn = document.getElementById('dropoff-btn');
+  const dropoffFeedback = document.getElementById('dropoff-feedback');
+  dropoffBtn?.addEventListener('click', () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('info@botakibaafrika.org.za').catch(() => {});
+    }
+    if (dropoffFeedback) {
+      dropoffFeedback.style.display = 'block';
+      setTimeout(() => { dropoffFeedback.style.display = 'none'; }, 4000);
+    }
+  });
+});
+</script>
 
 <script>
   // Mobile nav toggle (matches homepage behavior)
@@ -529,6 +835,84 @@
         item.classList.toggle('open');
       }
     });
+  });
+</script>
+
+<!-- ================================================================
+     SCRIPT: Back to Top
+     Shows the button only once the person is within ~300px of the
+     bottom of the page, hides it again once they scroll back up.
+     ================================================================ -->
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  function toggleBackToTop() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const distanceFromBottom = pageHeight - (scrollY + viewportHeight);
+
+    if (distanceFromBottom < 300) {
+      backToTopBtn.classList.add('is-visible');
+    } else {
+      backToTopBtn.classList.remove('is-visible');
+    }
+  }
+
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+  window.addEventListener('resize', toggleBackToTop);
+  toggleBackToTop(); // run once in case the page loads already scrolled
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Define your array of quotes and signatures
+    const quotes = [
+      {
+        text: "&ldquo;We do not paint to decorate a wall. We paint because the wall was empty of us, and it was time it wasn't.&rdquo;",
+        author: "— Visual Art Circle, Botaki Ba Afrika"
+      },
+      {
+        text: "&ldquo;Line, color, and canvas are not just tools; they are the memory keepers of our people.&rdquo;",
+        author: "— Naledi Khumalo"
+      },
+      {
+        text: "&ldquo;Art is not a luxury for the quiet room. It is the noise we make when history tries to stay silent.&rdquo;",
+        author: "— Sipho Radebe"
+      },
+      {
+        text: "&ldquo;Every brushstroke is a signature written in defense of our place in the sun.&rdquo;",
+        author: "— Thandi Mokoena"
+      }
+    ];
+
+    let currentIndex = 0;
+    const container = document.getElementById('quote-container');
+    const quoteText = document.getElementById('quote-text');
+    const quoteAuthor = document.getElementById('quote-author');
+
+    if (container && quoteText && quoteAuthor) {
+      setInterval(() => {
+        // Fade out
+        container.classList.add('fade-out');
+
+        setTimeout(() => {
+          // Advance index
+          currentIndex = (currentIndex + 1) % quotes.length;
+
+          // Update content
+          quoteText.innerHTML = quotes[currentIndex].text;
+          quoteAuthor.textContent = quotes[currentIndex].author;
+
+          // Fade back in
+          container.classList.remove('fade-out');
+        }, 400); // 400ms matches the CSS transition duration
+      }, 5000); // Rotates every 5000ms (5 seconds)
+    }
   });
 </script>
 
